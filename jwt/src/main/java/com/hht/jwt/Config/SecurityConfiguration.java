@@ -76,7 +76,11 @@ public class SecurityConfiguration {
         response.setContentType("application/json;charset=utf-8");
         PrintWriter writer = response.getWriter();
         String authorization = request.getHeader("Authorization");
-
+        if(utils.invalidJwt(authorization)){
+            writer.write(RestBean.success("退出成功").asJsonString());
+            return;
+        }
+        RestBean.failure(400,"退出登录失败");
     }
 
     private void handleProcess(HttpServletRequest request,

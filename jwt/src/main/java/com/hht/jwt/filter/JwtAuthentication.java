@@ -12,6 +12,7 @@ import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
+import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
@@ -20,6 +21,7 @@ import java.io.IOException;
  * @author 何鸿涛
  * @date 2024/11/3 下午8:23
  */
+@Component
 public class JwtAuthentication extends OncePerRequestFilter {
 
     @Resource

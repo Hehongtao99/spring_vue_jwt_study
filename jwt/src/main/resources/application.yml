@@ -4,6 +4,11 @@ spring:
     username: root
     password: hht500234
     driver-class-name: com.mysql.cj.jdbc.Driver
+  web:
+    cors:
+      origin: '*'
+      credentials: false
+      methods: '*'
   mail:
     host: smtp.163.com
     username: 13384403671@163.com
@@ -12,7 +17,6 @@ spring:
     jwt:
       key: hht500234
       expire-time: 72
-      filter: -100
   data:
     redis:
       host: 192.168.108.130

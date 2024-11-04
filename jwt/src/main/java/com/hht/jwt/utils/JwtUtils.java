@@ -121,14 +121,25 @@ public class JwtUtils {
      **/
 
 
-    public boolean invalidJwt(String headerToken){
+    /**
+     * 让jwt令牌失效
+     * @param headerToken
+     * @return
+     */
+    public Boolean invalidJwt(String headerToken){
         String token = this.convertToken(headerToken);
         Algorithm algorithm = Algorithm.HMAC256(key);
         JWTVerifier jwtVerifier = JWT.require(algorithm).build();
         DecodedJWT verify = jwtVerifier.verify(token);
-
+        return deleteToken(verify.getId(),verify.getExpiresAt());
     }
 
+    /**
+     * 删除jwt令牌
+     * @param uuid
+     * @param time
+     * @return
+     */
     private boolean deleteToken(String uuid,Date time){
         if(this.isBlacklistedInRedis(uuid)){
             return false;
@@ -140,6 +151,11 @@ public class JwtUtils {
         return true;
     }
 
+    /**
+     * 判断是否在redis黑名单中
+     * @param uuid
+     * @return
+     */
     private Boolean  isBlacklistedInRedis(String uuid){
         return Boolean.TRUE.equals(template.hasKey("jwt:blacklist:" + uuid));
     }
